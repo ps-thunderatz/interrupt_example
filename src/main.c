@@ -6,11 +6,11 @@
 
 #include "mcu.h"
 
+#include "gpio.h"
+
 /*****************************************
  * Private Constant Definitions
  *****************************************/
-
-#define LED_TOGGLE_DELAY_MS 1500
 
 /*****************************************
  * Main Function
@@ -19,8 +19,16 @@
 int main(void) {
     mcu_init();
 
-    for (;;) {
-        led_toggle();
-        mcu_sleep(LED_TOGGLE_DELAY_MS);
+    for (;;)
+        ;
+}
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
+    if (GPIO_Pin == GPIO_PIN_6) {
+        if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_6) == GPIO_PIN_SET) {
+            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+        } else {
+            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
+        }
     }
 }
