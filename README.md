@@ -1,6 +1,6 @@
 # Interrupt Example
 
-Esse repositório contém um exemplo de como utilizar pinos de input e de output.
+Esse repositório contém um exemplo de como utilizar interrupções externas.
 
 ## Descrição do cube e hardware
 
